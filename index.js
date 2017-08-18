@@ -31,7 +31,7 @@ const syncLogSources = []
 for (let i = 0; i < sourceCount; i++) {
 	syncLogSources.push(new LogSource())
 }
-require('./solution/sync-sorted-merge')(syncLogSources, new Printer())
+// require('./solution/sync-sorted-merge')(syncLogSources, new Printer())
 
 /**
  * Challenge Number 2!

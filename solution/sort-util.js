@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
 // sort-util.js contains functions common to async-sorted-merge and
 // sync-sorted-merge
 
-const _ = require('lodash')
+const _ = require('lodash');
 
 module.exports = {
   // @function merge(array)
@@ -34,8 +34,8 @@ module.exports = {
 			return arr;
 		}
 		const middle = Math.floor(arr.length / 2),
-				left    = arr.slice(0, middle),
-				right   = arr.slice(middle);
+		  left = arr.slice(0, middle),
+		  right = arr.slice(middle);
 		return this.merge(this.mergeSort(left), this.mergeSort(right));
 	},
 
@@ -55,5 +55,4 @@ module.exports = {
     arr[i] = item;
     return arr;
   }
-
 }

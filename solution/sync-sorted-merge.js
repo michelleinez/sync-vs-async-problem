@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const _ = require('lodash');
 const SortUtil = require('./sort-util');
@@ -18,7 +18,7 @@ module.exports = (logSources, printer) => {
 
   // @function handlePopulatedArray(array)
   // @param {Array} arrayLogs Array of log objects sorted by log source index.
-  // @param {Array} arrayLogs Array of the same log objects sorted by date.
+  // @param {Array} sortedArray Array of the same log objects sorted by date.
   // Recursive function which prints out logs from oldest to most recent.
   const handlePopulatedArray = (arrayLogs, sortedArray) => {
     // Get the oldest log among all log sources
