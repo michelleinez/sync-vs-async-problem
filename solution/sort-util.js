@@ -43,7 +43,7 @@ module.exports = {
   // @param {Array} arr Input Already sorted array where log is to be inserted.
   // @param {Obj} val Log object.
   // @return {Array} Sorted array with value inserted.
-  // Merge sort for sorting arrays of logs by their dates.
+  // Binary insertion implementation to insert single values into sorted arrays.
   binaryInsertion: function(arr, val) {
     arr.push(val);
     let i = arr.length - 1;
