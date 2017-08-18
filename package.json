@@ -19,11 +19,8 @@
   "homepage": "https://github.com/BuildingConnected/interviews",
   "dependencies": {
     "Faker": "~0.7.0",
-    "benchmark": "git+https://github.com/bestiejs/benchmark.js.git",
     "bluebird": "^3.4.1",
-    "lodash": "^4.13.1",
-    "microtime": "^2.1.6",
-    "sort-algorithms": "^1.1.0"
+    "lodash": "^4.13.1"
   },
   "devDependencies": {
     "ava": "^0.15.2"
