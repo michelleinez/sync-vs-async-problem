@@ -1,46 +1,9 @@
 'use strict'
 
-const _ = require('lodash')
+const _ = require('lodash');
+const SortUtil = require('./sort-util');
 
 module.exports = (logSources, printer) => {
-  // Sorting helper function
-	const merge = function(left, right) {
-		const result  = [];
-		let il = 0, ir = 0;
-		while (il < left.length && ir < right.length) {
-			if (left[il].date < right[ir].date){
-				result.push(left[il++]);
-			} else {
-				result.push(right[ir++]);
-			}
-		}
-		return result.concat(left.slice(il)).concat(right.slice(ir));
-	}
-
-	// Merge sort for sorting arrays of logs by date
-	const mergeSort = function(arr) {
-		// Terminal case: 0 or 1 item arrays don't need sorting
-		if (arr.length < 2) {
-			return arr;
-		}
-		const middle = Math.floor(arr.length / 2),
-				left    = arr.slice(0, middle),
-				right   = arr.slice(middle);
-		return merge(mergeSort(left), mergeSort(right));
-	}
-
-  function binaryInsertion(arr, val) {
-    arr.push(val);
-    let i = arr.length - 1;
-    const item = arr[i];
-    while (i > 0 && item.date < arr[i-1].date) {
-        arr[i] = arr[i-1];
-        i -= 1;
-    }
-    arr[i] = item;
-    return arr;
-  }
-
   const arrayLogs = [];
   let emptyLogSources = 0;
   const capacityLogArray = Object.keys(logSources).length;
@@ -49,8 +12,14 @@ module.exports = (logSources, printer) => {
   _.each(logSources, (logSourceObj, sourceIdx) => {
     arrayLogs.push(logSourceObj.pop());
   });
-  // Sort the logs by date
-  const sortedArray = mergeSort(arrayLogs);
+
+  // Sort the log objects by date
+  const sortedArray = SortUtil.mergeSort(arrayLogs);
+
+  // @function handlePopulatedArray(array)
+  // @param {Array} arrayLogs Array of log objects sorted by log source index.
+  // @param {Array} arrayLogs Array of the same log objects sorted by date.
+  // Recursive function which prints out logs from oldest to most recent.
   const handlePopulatedArray = (arrayLogs, sortedArray) => {
     // Get the oldest log among all log sources
 		const oldest = sortedArray.shift();
@@ -60,12 +29,13 @@ module.exports = (logSources, printer) => {
 		if(oldest) {
 			printer.print(oldest);
 		} else {
+      // If no logs are left, finish execution.
 			printer.done();
 			return;
 		}
 		const log = logSources[sourceIdx].pop();
 		arrayLogs[sourceIdx] = log;
-    sortedArray = binaryInsertion(sortedArray, log);
+    sortedArray = SortUtil.binaryInsertion(sortedArray, log);
 		handlePopulatedArray(arrayLogs, sortedArray);
 	}
   handlePopulatedArray(arrayLogs, sortedArray);
