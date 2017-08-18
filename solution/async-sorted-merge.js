@@ -3,10 +3,6 @@
 const _ = require('lodash');
 const SortUtil = require('./sort-util');
 
-// TODO: Replace the repetition of mergesort with a binaryInsertion function.
-// TODO: Figure out how to return the source index of a promise upon resolution
-// without editing the asynchronous function itself.
-
 // In the asynchronous case, when we pop an element from the LogSource Object,
 // we will see delays of up to 8 milliseconds.
 
